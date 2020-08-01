@@ -1,0 +1,12 @@
+{
+  "name": "tennis2020",
+  "displayName": "tennis2020",
+  "expo": {
+    "name": "tennis2020",
+    "slug": "tennis2020",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
