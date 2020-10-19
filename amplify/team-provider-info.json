@@ -1,0 +1,15 @@
+{
+  "tennisapp": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tennis2020-tennisapp-142935-authRole",
+      "UnauthRoleArn": "arn:aws:iam::076981282048:role/amplify-tennis2020-tennisapp-142935-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::076981282048:role/amplify-tennis2020-tennisapp-142935-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-tennis2020-tennisapp-142935-deployment",
+      "UnauthRoleName": "amplify-tennis2020-tennisapp-142935-unauthRole",
+      "StackName": "amplify-tennis2020-tennisapp-142935",
+      "StackId": "arn:aws:cloudformation:eu-west-1:076981282048:stack/amplify-tennis2020-tennisapp-142935/35360330-08e4-11eb-b655-0609dbbf2116",
+      "AmplifyAppId": "d39i0o2fezqd23"
+    }
+  }
+}

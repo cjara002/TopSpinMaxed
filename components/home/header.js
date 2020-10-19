@@ -1,8 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
 import ball from "./homeImages/ball.png";
 
 export class Header extends React.Component {
+
+  onPressButton = () => {
+    console.log('PressButton');
+   }
+
   render() {
     return (
       <React.Fragment>
@@ -10,6 +15,8 @@ export class Header extends React.Component {
           <Text style={styles.appName}>TopSpin Maxed</Text>
           <Image style={styles.logoImage}source={ball}/>
           <Text style={styles.headText}>Login</Text>
+          <Button onPress={this.goTologinPage} title="Log In"/>
+    {/* <Text> Hello  { this.props.user && this.props.user.email}</Text> */}
         </View>
       </React.Fragment>
     );

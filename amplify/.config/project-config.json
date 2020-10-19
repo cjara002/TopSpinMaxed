@@ -1,0 +1,17 @@
+{
+  "projectName": "tennis2020",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react-native",
+    "config": {
+      "SourceDir": "/",
+      "DistributionDir": "/",
+      "BuildCommand": "build",
+      "StartCommand": "expo start"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
