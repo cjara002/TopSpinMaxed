@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Clay from "./Images/clay.jpg";
-import Ball from "./Images/ballReflection.jpg";
+// import Ball from "./Images/ballReflection.jpg";
 
 export class Login extends React.Component {
   state = {
@@ -26,15 +26,16 @@ export class Login extends React.Component {
     return (
       <ImageBackground source={Clay} style={{ width: "100%", height: "100%" }}>
         <View style={styles.container}>
-          <View style={styles.headingSection}>
+          {/* <View style={styles.headingSection}>
+          can put my logo here
             <Image source={Ball} style={{ width: 100, height: 100 }} />
-          </View>
-          <Text style={styles.heading}>Login</Text>
+          </View> */}
+          <Text style={styles.heading}>TopSpin Maxed</Text>
           {this.state.errorMessage && (
             <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
           )}
           <TextInput
-            placeholder="Email"
+            placeholder=" Email"
             autoCapitalize="none"
             style={styles.textInput}
             onChangeText={(email) => this.setState({ email })}
@@ -42,7 +43,7 @@ export class Login extends React.Component {
           />
           <TextInput
             secureTextEntry
-            placeholder="Password"
+            placeholder=" Password"
             autoCapitalize="none"
             style={styles.textInput}
             onChangeText={(password) => this.setState({ password })}
@@ -56,7 +57,7 @@ export class Login extends React.Component {
           <Button
             title="Don't have an account? Sign Up"
             color="transparent"
-            onPress={() => this.props.navigation.navigate("SignUp")}
+            onPress={() => this.props.navigation.navigate("signUpRT")}
           />
         </View>
       </ImageBackground>
