@@ -1,0 +1,7 @@
+{
+    "tennisapp": {
+        "configLevel": "project",
+        "useProfile": true,
+        "profileName": "AWSTennis"
+    }
+}
