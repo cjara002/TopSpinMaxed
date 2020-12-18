@@ -12,6 +12,18 @@ export const getTodo = /* GraphQL */ `
     }
   }
 `;
+export const getTennisPlayer = /* GraphQL still editing*/ `
+  query GetTodo($id: ID!) {
+    getTodo(id: $id) {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const listTodos = /* GraphQL */ `
   query ListTodos(
     $filter: ModelTodoFilterInput

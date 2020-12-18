@@ -35,8 +35,56 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apitennis2020"
       },
-      "lastPushTimeStamp": "2020-10-18T19:57:13.677Z",
+      "lastPushTimeStamp": "2020-11-07T18:15:41.053Z",
       "lastPushDirHash": "L7oktj1DpkkG9O4eUq/MQVgbSAg="
+    }
+  },
+  "auth": {
+    "tennis2020756d5ba3": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/auth/tennis2020756d5ba3-cloudformation-template.yml",
+        "logicalId": "authtennis2020756d5ba3"
+      },
+      "lastPushTimeStamp": "2020-11-07T18:15:41.066Z",
+      "output": {
+        "AppClientSecret": "noujd3f0443o4vep0ilthui66vgnamshg3ii97p174rbpfi4ikj",
+        "UserPoolId": "eu-west-1_B0WwH4YzR",
+        "AppClientIDWeb": "1j6uh7da07fvsi6kopphuvadb5",
+        "AppClientID": "4p6neo6rul00hq46hmr5k8t9hk",
+        "IdentityPoolId": "eu-west-1:2d90e4bb-5bf1-4556-b3e9-0d718017ed13",
+        "IdentityPoolName": "tennis2020756d5ba3_identitypool_756d5ba3__tennisapp",
+        "UserPoolName": "tennis2020756d5ba3_userpool_756d5ba3"
+      },
+      "lastPushDirHash": "78YvN+rmRedTWO8ys5hzU61pDs8="
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "tennis2020756d5ba3",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2020-11-07T18:15:41.089Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/auth/template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {
+        "tennisTSMGroupRole": "arn:aws:iam::076981282048:role/eu-west-1_B0WwH4YzR-tennisTSMGroupRole"
+      },
+      "lastPushDirHash": "L6kXpLMrlkWeqodDCfEtjE6upAA="
     }
   }
 }
