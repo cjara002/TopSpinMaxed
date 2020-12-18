@@ -10,6 +10,12 @@
       "StackName": "amplify-tennis2020-tennisapp-142935",
       "StackId": "arn:aws:cloudformation:eu-west-1:076981282048:stack/amplify-tennis2020-tennisapp-142935/35360330-08e4-11eb-b655-0609dbbf2116",
       "AmplifyAppId": "d39i0o2fezqd23"
+    },
+    "categories": {
+      "auth": {
+        "tennis2020756d5ba3": {},
+        "userPoolGroups": {}
+      }
     }
   }
 }

@@ -6,74 +6,77 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  Image,
+  // Image,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import Clay from "./Images/clay.jpg";
-// import Ball from "./Images/ballReflection.jpg";
+import tennisSignUp from "./Images/tennisSignUp.jpg";
 import {
-  validateUsername,
   validatePassword,
+  validateUsername,
+  validateEmail,
 } from "./validationSchema";
 import { Auth } from "aws-amplify";
 
-export default function Login(props) {
+export default function SignUp2(props) {
   const [state, setState] = useState({
     username: "",
-    // email: "",
+    email: "",
     password: "",
   });
 
   const [error, setError] = useState({
     username: "",
-    // email: "",
+    email: "",
     password: "",
   });
 
   async function onSubmit() {
     const usernameError = validateUsername(state.username);
-    // const emailError = validateEmail(state.email);
+    const emailError = validateEmail(state.email);
     const passwordError = validatePassword(state.password);
-    if (usernameError || passwordError) {
+    if (usernameError || passwordError || emailError) {
       setError({
         username: usernameError,
-        // email: emailError,
+        email: emailError,
         password: passwordError,
       });
     } else {
       try {
-        const user = await Auth.signIn(
-          {
-            username: state.username,
-            password: state.password,
-            //   attributes: {
-            //     email: state.email,
-            // }
-          }
-          // console.log("onSubmit", user, state.email)
-        );
-        props.onStateChange("home", user);
+        const user = await Auth.signUp({
+          username: state.username,
+          password: state.password,
+          attributes: {
+            email: state.email,
+        }
+        },
+        console.log("onSubmit", user, state.email));
+        props.onStateChange("confirmSignUp", user)
       } catch (error) {
-        console.log("onSubmit logIn", error.message);
+        console.log("onSubmit SignUp2", error.message);
         Alert.alert(error.message);
       }
     }
   }
 
-  if (props.authState === "signIn") {
+  if (props.authState === "signUp") {
     return (
-     <React.Fragment>
-        <ImageBackground source={Clay} style={{ width: "100%", height: "100%" }}>
+      <React.Fragment>
+        <ImageBackground
+          source={tennisSignUp}
+          style={{ width: "100%", height: "100%" }}
+        >
           <View style={styles.container}>
             {/* <View style={styles.headingSection}>
-            can put my logo here
-              <Image source={Ball} style={{ width: 100, height: 100 }} />
+            logo here
+              <Image
+                source={ballReflection}
+                style={{ width: 100, height: 100 }}
+              />
             </View> */}
-            <Text style={styles.heading}>TopSpin Maxed</Text>
-            {/* {this.state.errorMessage && (
-              <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
-            )} */}
+            <Text style={styles.heading}>Sign Up</Text>
+
             <TextInput
               placeholder="Username"
               autoCapitalize="none"
@@ -81,44 +84,63 @@ export default function Login(props) {
               onChangeText={(text) => setState({ ...state, username: text })}
               value={state.username}
             />
-  
+
             <Text style={styles.error}>{error.username}</Text>
-  
+
+            <TextInput
+              placeholder="Email"
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={(text) => setState({ ...state, email: text })}
+              value={state.email}
+            />
+
+            <Text style={styles.error}>{error.email}</Text>
+
             <TextInput
               secureTextEntry
-              placeholder="Password"
+              placeholder=" Password"
               autoCapitalize="none"
               style={styles.textInput}
               onChangeText={(text) => setState({ ...state, password: text })}
               value={state.password}
             />
-  
+
             <Text style={styles.error}>{error.password}</Text>
-  
+
+            {/* Phone Number
+            <TextInput
+              secureTextEntry
+              placeholder=" Password"
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={(password) => this.setState({ password })}
+              value={this.state.password}
+            /> */}
             <TouchableOpacity onPress={() => onSubmit()}>
               <View style={styles.signupBtn}>
-                <Text style={styles.buttonText}>Sign In</Text>
+                <Text style={styles.buttonText}>Sign Up</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.buttonRow}>
               <Button
                 color="transparent"
-                title="Forgot Password"
-                onPress={() => props.onStateChange("forgotPassword", {})}
-                accessibilityLabel="Forgot Password"
+                title="Back to Sign In"
+                onPress={() => props.onStateChange("signIn", {})}
+                accessibilityLabel="back to sign in"
               />
               <Button
                 color="transparent"
-                title="Sign Up"
-                onPress={() => props.onStateChange("signUp", {})}
-                accessibilityLabel="Sign Up"
+                title="Confirm a Code"
+                onPress={() => props.onStateChange("confirmSignUp", {})}
+                accessibilityLabel="Confirm a Code"
               />
             </View>
           </View>
         </ImageBackground>
-     </React.Fragment>
+      </React.Fragment>
     );
-  }else {
+  } else {
     return <></>;
   }
 }
@@ -146,7 +168,8 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 1,
     marginTop: 8,
-    color: "#fff",
+    color: "white",
+    padding: 10,
   },
   signupBtn: {
     borderRadius: 5,
@@ -168,5 +191,9 @@ const styles = StyleSheet.create({
   buttonRow: {
     // flex: 1,
     flexDirection: "row",
+  },
+  error: {
+    color: "red",
+    paddingBottom: 10,
   },
 });

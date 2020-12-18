@@ -6,74 +6,69 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  Image,
+  // Image,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import Clay from "./Images/clay.jpg";
-// import Ball from "./Images/ballReflection.jpg";
+import tennisSignUp from "./Images/tennisSignUp.jpg";
 import {
+//   validateEmail,
   validateUsername,
-  validatePassword,
 } from "./validationSchema";
 import { Auth } from "aws-amplify";
 
-export default function Login(props) {
+export default function confirmSignUp(props) {
   const [state, setState] = useState({
     username: "",
     // email: "",
-    password: "",
+    confirmationCode: "",
   });
 
   const [error, setError] = useState({
     username: "",
     // email: "",
-    password: "",
+    // confirmationCode: "",
   });
 
   async function onSubmit() {
-    const usernameError = validateUsername(state.username);
-    // const emailError = validateEmail(state.email);
-    const passwordError = validatePassword(state.password);
-    if (usernameError || passwordError) {
+    const {username, confirmationCode: code} = state;
+    const usernameError = validateUsername(username);
+    if ( usernameError) {
       setError({
         username: usernameError,
-        // email: emailError,
-        password: passwordError,
       });
     } else {
       try {
-        const user = await Auth.signIn(
-          {
-            username: state.username,
-            password: state.password,
-            //   attributes: {
-            //     email: state.email,
-            // }
-          }
-          // console.log("onSubmit", user, state.email)
+        const user = await Auth.confirmSignUp( username, code,
+        console.log("onSubmit confirmsignup", user, username),
         );
-        props.onStateChange("home", user);
+        setState({confirmationCode: ""})
+        props.onStateChange("signIn")
       } catch (error) {
-        console.log("onSubmit logIn", error.message);
+        console.log("onSubmit confirmsignup", error.message);
         Alert.alert(error.message);
       }
     }
   }
 
-  if (props.authState === "signIn") {
+  if (props.authState === "confirmSignUp") {
     return (
-     <React.Fragment>
-        <ImageBackground source={Clay} style={{ width: "100%", height: "100%" }}>
+      <React.Fragment>
+        <ImageBackground
+          source={tennisSignUp}
+          style={{ width: "100%", height: "100%" }}
+        >
           <View style={styles.container}>
             {/* <View style={styles.headingSection}>
-            can put my logo here
-              <Image source={Ball} style={{ width: 100, height: 100 }} />
+            logo here
+              <Image
+                source={ballReflection}
+                style={{ width: 100, height: 100 }}
+              />
             </View> */}
-            <Text style={styles.heading}>TopSpin Maxed</Text>
-            {/* {this.state.errorMessage && (
-              <Text style={{ color: "red" }}>{this.state.errorMessage}</Text>
-            )} */}
+            <Text style={styles.heading}>Confirm Sign Up</Text>
+
             <TextInput
               placeholder="Username"
               autoCapitalize="none"
@@ -81,44 +76,63 @@ export default function Login(props) {
               onChangeText={(text) => setState({ ...state, username: text })}
               value={state.username}
             />
-  
+
             <Text style={styles.error}>{error.username}</Text>
-  
-            <TextInput
-              secureTextEntry
-              placeholder="Password"
+
+            {/* <TextInput
+              placeholder="Email"
               autoCapitalize="none"
               style={styles.textInput}
-              onChangeText={(text) => setState({ ...state, password: text })}
-              value={state.password}
+              onChangeText={(text) => setState({ ...state, email: text })}
+              value={state.email}
             />
-  
-            <Text style={styles.error}>{error.password}</Text>
-  
+
+            <Text style={styles.error}>{error.email}</Text> */}
+
+            <TextInput
+            //   secureTextEntry
+              placeholder=" Confirmation Code"
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={(text) => setState({ ...state, confirmationCode: text })}
+              value={state.confirmationCode}
+            />
+
+            {/* <Text style={styles.error}>{error.confirmationCode}</Text> */}
+
+            {/* Phone Number
+            <TextInput
+              secureTextEntry
+              placeholder=" Password"
+              autoCapitalize="none"
+              style={styles.textInput}
+              onChangeText={(password) => this.setState({ password })}
+              value={this.state.password}
+            /> */}
             <TouchableOpacity onPress={() => onSubmit()}>
               <View style={styles.signupBtn}>
-                <Text style={styles.buttonText}>Sign In</Text>
+                <Text style={styles.buttonText}>Confirm</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.buttonRow}>
               <Button
                 color="transparent"
-                title="Forgot Password"
-                onPress={() => props.onStateChange("forgotPassword", {})}
-                accessibilityLabel="Forgot Password"
+                title="Back to Sign In"
+                onPress={() => props.onStateChange("signIn", {})}
+                accessibilityLabel="back to sign in"
               />
               <Button
                 color="transparent"
-                title="Sign Up"
+                title="back to sign up"
                 onPress={() => props.onStateChange("signUp", {})}
-                accessibilityLabel="Sign Up"
+                accessibilityLabel="back to sign up"
               />
             </View>
           </View>
         </ImageBackground>
-     </React.Fragment>
+      </React.Fragment>
     );
-  }else {
+  } else {
     return <></>;
   }
 }
@@ -146,7 +160,8 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderWidth: 1,
     marginTop: 8,
-    color: "#fff",
+    color: "white",
+    padding: 10,
   },
   signupBtn: {
     borderRadius: 5,
@@ -168,5 +183,9 @@ const styles = StyleSheet.create({
   buttonRow: {
     // flex: 1,
     flexDirection: "row",
+  },
+  error: {
+    color: "red",
+    paddingBottom: 10,
   },
 });

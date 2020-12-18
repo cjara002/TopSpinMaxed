@@ -1,31 +1,44 @@
+import { Auth } from "aws-amplify";
 import React from "react";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
 import ball from "./homeImages/ball.png";
 
-export class Header extends React.Component {
-  // goToLoginPage = () => {
-  //   console.log("PressButton");
-  // };
+export default function Header(props) {
 
-  render() {
-    return (
-      <React.Fragment>
-        <View style={styles.headStyle}>
-          <Text style={styles.appName}>TopSpin Maxed</Text>
-          <Image style={styles.logoImage} source={ball} />
-          <Text style={styles.headText} 
+  async function onSubmit() {
+    try {
+      await Auth.signOut(); 
+      props.onStateChange("signIn");
+    } catch (error) {
+      console.log("onSubmit signOut", error.message);
+      Alert.alert(error.message);
+    }
+  }
+
+  return (
+    <React.Fragment>
+      <View style={styles.headStyle}>
+        <Text style={styles.appName}>TopSpin Maxed</Text>
+        <Image style={styles.logoImage} source={ball} />
+        {/* <Text style={styles.headText} 
           // onPress={this.goToLoginPage}
-          onPress={() => this.props.navigate("loginRT")}
+          onPress={() => onSubmit()}
             //this will become sign out later on
           >
-            Log In
-          </Text>
-          {/* <Button onPress={this.goTologinPage} title="Log In"/> */}
-          {/* <Text> Hello  { this.props.user && this.props.user.email}</Text> */}
-        </View>
-      </React.Fragment>
-    );
-  }
+            Sign Out
+          </Text> */}
+        <Button
+          color="transparent"
+          title="Sign Out"
+          onPress={onSubmit()}
+          accessibilityLabel="Sign Out"
+        />
+        {/* <Button onPress={this.goTologinPage} title="Log In"/> */}
+        {/* <Text> Hello  {props.username}</Text> */}
+      </View>
+    </React.Fragment>
+  );
+  // }
 }
 
 const styles = StyleSheet.create({
