@@ -1,14 +1,14 @@
 import { Auth } from "aws-amplify";
 import React from "react";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
 import ball from "./homeImages/ball.png";
 
 export default function Header(props) {
 
-  async function onSubmit() {
+  async function signOut() {
     try {
       await Auth.signOut(); 
-      props.onStateChange("signIn");
+      // props.onStateChange("signIn");
     } catch (error) {
       console.log("onSubmit signOut", error.message);
       Alert.alert(error.message);
@@ -30,7 +30,7 @@ export default function Header(props) {
         <Button
           color="transparent"
           title="Sign Out"
-          onPress={onSubmit()}
+          onPress={() => signOut()}
           accessibilityLabel="Sign Out"
         />
         {/* <Button onPress={this.goTologinPage} title="Log In"/> */}
