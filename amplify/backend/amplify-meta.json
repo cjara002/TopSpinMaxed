@@ -31,11 +31,12 @@
         "GraphQLAPIEndpointOutput": "https://4utmqfdkarbwnkeb6hxwpgnnq4.appsync-api.eu-west-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-bnwucwf4sngi3erolktnz5esf4"
       },
-      "lastPushTimeStamp": "2020-12-06T04:07:33.304Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apitennis2020"
-      }
+      },
+      "lastPushTimeStamp": "2020-12-24T16:49:09.273Z",
+      "lastPushDirHash": "L7oktj1DpkkG9O4eUq/MQVgbSAg="
     }
   },
   "auth": {
@@ -44,6 +45,11 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/auth/tennis2020756d5ba3-cloudformation-template.yml",
+        "logicalId": "authtennis2020756d5ba3"
+      },
+      "lastPushTimeStamp": "2020-12-24T16:49:09.286Z",
       "output": {
         "AppClientSecret": "noujd3f0443o4vep0ilthui66vgnamshg3ii97p174rbpfi4ikj",
         "UserPoolId": "eu-west-1_B0WwH4YzR",
@@ -53,11 +59,7 @@
         "IdentityPoolName": "tennis2020756d5ba3_identitypool_756d5ba3__tennisapp",
         "UserPoolName": "tennis2020756d5ba3_userpool_756d5ba3"
       },
-      "lastPushTimeStamp": "2020-12-06T04:07:33.315Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/auth/tennis2020756d5ba3-cloudformation-template.yml",
-        "logicalId": "authtennis2020756d5ba3"
-      }
+      "lastPushDirHash": "78YvN+rmRedTWO8ys5hzU61pDs8="
     },
     "userPoolGroups": {
       "service": "Cognito-UserPool-Groups",
@@ -74,14 +76,15 @@
           ]
         }
       ],
-      "output": {
-        "tennisTSMGroupRole": "arn:aws:iam::076981282048:role/eu-west-1_B0WwH4YzR-tennisTSMGroupRole"
-      },
-      "lastPushTimeStamp": "2020-12-06T04:07:33.326Z",
+      "lastPushTimeStamp": "2020-12-24T16:49:09.296Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-tennis2020-tennisapp-142935-deployment/amplify-cfn-templates/auth/template.json",
         "logicalId": "authuserPoolGroups"
-      }
+      },
+      "output": {
+        "tennisTSMGroupRole": "arn:aws:iam::076981282048:role/eu-west-1_B0WwH4YzR-tennisTSMGroupRole"
+      },
+      "lastPushDirHash": "L6kXpLMrlkWeqodDCfEtjE6upAA="
     }
   }
 }

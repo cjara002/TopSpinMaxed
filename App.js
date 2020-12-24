@@ -4,6 +4,7 @@ import "react-native-gesture-handler";
 import SignIn from "./components/screens/login.js";
 import  SignUp2  from "./components/screens/SignUp2.js";
 import  ConfirmSignUp  from "./components/screens/confirmSignUp.js";
+// import  ForgotPassword  from "./components/screens/forgotPassword.js";
 import  Home  from "./components/home/home";
 // import { dashBoard }  from "./components/dashboard/dashBoard.js";
 // import { playerForm } from "./components/dashboard/playerForm.jsx";
@@ -19,7 +20,11 @@ import { View, StyleSheet } from "react-native";
 // import AWSAppSyncClient from "aws-appsync";
 import Amplify from "aws-amplify";
 import config from "./aws-exports";
-Amplify.configure(config);
+Amplify.configure({...config,
+  Analytics: {
+    disabled: true,
+  }
+});
 
 console.disableYellowBox = true;
 
@@ -44,8 +49,9 @@ export default function App() {
         <SignUp2 />
          <ConfirmSignUp />
          <SignIn />
-
         <Home />
+        {/* <ForgotPassword /> */}
+
         <ConfirmSignIn />
         <ForgotPassword /> 
 
