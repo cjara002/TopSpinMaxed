@@ -6,66 +6,65 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  // Image,
   Dimensions,
   TouchableOpacity,
   Alert,
 } from "react-native";
-import tennisSignUp from "./Images/tennisSignUp.jpg";
-// import aoLogin from "./Images/AustralianOpen/AO Login Screen.jpg"
-import {
-  validatePassword,
-  validateUsername,
-  validateEmail,
-} from "./validationSchema";
+import aoConfirmSignIn from "./Images/AustralianOpen/aoConfirmSignUp.jpg";
+import { validateUsername, validatePassword } from "./validationSchema";
 import { Auth } from "aws-amplify";
 
-export default function SignUp2(props) {
+export default function confirmSignIn(props) {
   const [state, setState] = useState({
     username: "",
-    email: "",
     password: "",
+    verificationCode: "",
   });
 
   const [error, setError] = useState({
-    username: "",
-    email: "",
     password: "",
+    username: "",
   });
 
   async function onSubmit() {
-    const usernameError = validateUsername(state.username);
-    const emailError = validateEmail(state.email);
-    const passwordError = validatePassword(state.password);
-    if (usernameError || passwordError || emailError) {
+    const { username, password, verificationCode: code } = state;
+    const usernameError = validateUsername(username);
+    const passwordError = validatePassword(password);
+    if (passwordError || usernameError) {
       setError({
-        username: usernameError,
-        email: emailError,
         password: passwordError,
+        username: usernameError,
       });
     } else {
       try {
-        const user = await Auth.signUp({
-          username: state.username,
-          password: state.password,
-          attributes: {
-            email: state.email,
-        }
-        },
-        console.log("onSubmit", user, state.email));
-        props.onStateChange("confirmSignUp", user)
+        // const user = await Auth.confirm(
+        const user = await Auth.forgotPasswordSubmit(
+          username,
+          password,
+          code,
+          console.log(
+            "onSubmit confirmsignIn",
+            user,
+            username,
+            password,
+            code
+          )
+        );
+        setState({ verificationCode: "" });
+        //setState({ verificationCode});
+        props.onStateChange("signIn");
       } catch (error) {
-        console.log("onSubmit SignUp2", error.message);
+        console.log("onSubmit confirmsignIn", error.message);
         Alert.alert(error.message);
       }
     }
   }
 
-  if (props.authState === "signUp") {
+  if (props.authState === "confirmSignIn") {
     return (
       <React.Fragment>
         <ImageBackground
-          source={tennisSignUp}
+          source={aoConfirmSignIn}
           style={{ width: "100%", height: "100%" }}
         >
           <View style={styles.container}>
@@ -76,7 +75,7 @@ export default function SignUp2(props) {
                 style={{ width: 100, height: 100 }}
               />
             </View> */}
-            <Text style={styles.heading}>Sign Up</Text>
+            <Text style={styles.heading}>Reset Password</Text>
 
             <TextInput
               placeholder="Username"
@@ -89,18 +88,18 @@ export default function SignUp2(props) {
             <Text style={styles.error}>{error.username}</Text>
 
             <TextInput
-              placeholder="Email"
+              //   secureTextEntry
+              placeholder="Verification Code"
               autoCapitalize="none"
               style={styles.textInput}
-              onChangeText={(text) => setState({ ...state, email: text })}
-              value={state.email}
+              onChangeText={(text) =>
+                setState({ ...state, verificationCode: text })
+              }
+              value={state.verificationCode}
             />
 
-            <Text style={styles.error}>{error.email}</Text>
-
             <TextInput
-              secureTextEntry
-              placeholder=" Password"
+              placeholder="New Password"
               autoCapitalize="none"
               style={styles.textInput}
               onChangeText={(text) => setState({ ...state, password: text })}
@@ -109,18 +108,9 @@ export default function SignUp2(props) {
 
             <Text style={styles.error}>{error.password}</Text>
 
-            {/* Phone Number
-            <TextInput
-              secureTextEntry
-              placeholder=" Password"
-              autoCapitalize="none"
-              style={styles.textInput}
-              onChangeText={(password) => this.setState({ password })}
-              value={this.state.password}
-            /> */}
             <TouchableOpacity onPress={() => onSubmit()}>
               <View style={styles.signupBtn}>
-                <Text style={styles.buttonText}>Sign Up</Text>
+                <Text style={styles.buttonText}>Confirm</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.buttonRow}>
@@ -130,12 +120,12 @@ export default function SignUp2(props) {
                 onPress={() => props.onStateChange("signIn", {})}
                 accessibilityLabel="back to sign in"
               />
-              <Button
+              {/* <Button
                 color="transparent"
-                title="Confirm a Code"
-                onPress={() => props.onStateChange("confirmSignUp", {})}
-                accessibilityLabel="Confirm a Code"
-              />
+                title="back to sign in"
+                onPress={() => props.onStateChange("signIn", {})}
+                accessibilityLabel="back to sign in"
+              /> */}
             </View>
           </View>
         </ImageBackground>

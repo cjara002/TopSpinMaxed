@@ -10,13 +10,14 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import Clay from "./Images/clay.jpg";
+// import Clay from "./Images/clay.jpg";
 // import Ball from "./Images/ballReflection.jpg";
 import {
   validateUsername,
   validatePassword,
 } from "./validationSchema";
 import { Auth } from "aws-amplify";
+import aoLogin from "./Images/AustralianOpen/aoLoginScreen.jpg"
 
 export default function Login(props) {
   const [state, setState] = useState({
@@ -64,7 +65,7 @@ export default function Login(props) {
   if (props.authState === "signIn") {
     return (
      <React.Fragment>
-        <ImageBackground source={Clay} style={{ width: "100%", height: "100%" }}>
+        <ImageBackground source={aoLogin} style={{ width: "100%", height: "100%" }}>
           <View style={styles.container}>
             {/* <View style={styles.headingSection}>
             can put my logo here

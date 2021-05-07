@@ -8,7 +8,6 @@ export default function Header(props) {
   async function signOut() {
     try {
       await Auth.signOut(); 
-      // props.onStateChange("signIn");
     } catch (error) {
       console.log("onSubmit signOut", error.message);
       Alert.alert(error.message);
@@ -20,21 +19,14 @@ export default function Header(props) {
       <View style={styles.headStyle}>
         <Text style={styles.appName}>TopSpin Maxed</Text>
         <Image style={styles.logoImage} source={ball} />
-        {/* <Text style={styles.headText} 
-          // onPress={this.goToLoginPage}
-          onPress={() => onSubmit()}
-            //this will become sign out later on
-          >
-            Sign Out
-          </Text> */}
         <Button
           color="transparent"
           title="Sign Out"
           onPress={() => signOut()}
           accessibilityLabel="Sign Out"
+          style={styles.headText}
         />
-        {/* <Button onPress={this.goTologinPage} title="Log In"/> */}
-        {/* <Text> Hello  {props.username}</Text> */}
+        {/* <Text style={styles.headStyle}> Hello {props.user}</Text> */}
       </View>
     </React.Fragment>
   );
@@ -42,26 +34,23 @@ export default function Header(props) {
 }
 
 const styles = StyleSheet.create({
+  headStyle: {
+    paddingTop: 40,
+    paddingRight: 10,
+    backgroundColor: "#31455a",
+    flexDirection: "row",
+    borderBottomWidth: 2,
+  },
   headText: {
     textAlign: "right",
     color: "white",
     fontSize: 20,
-    flex: 1,
   },
   appName: {
     textAlign: "left",
     color: "white",
     fontSize: 15,
     flex: 1,
-  },
-  headStyle: {
-    paddingTop: 40,
-    paddingRight: 10,
-    backgroundColor: "#31455a",
-    flex: 1,
-    flexDirection: "row",
-    borderBottomWidth: 2,
-    // bordercolor
   },
   logoImage: {
     flex: 1,

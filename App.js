@@ -1,10 +1,11 @@
 import React from "react";
 import "react-native-gesture-handler";
 // import { loading } from "./components/screens/loading.js";
+import ConfirmSignIn from "./components/screens/confirmSignIn.js";
 import SignIn from "./components/screens/login.js";
 import  SignUp2  from "./components/screens/SignUp2.js";
 import  ConfirmSignUp  from "./components/screens/confirmSignUp.js";
-// import  ForgotPassword  from "./components/screens/forgotPassword.js";
+import  ForgotPassword  from "./components/screens/forgotPassword.js";
 import  Home  from "./components/home/home";
 // import { dashBoard }  from "./components/dashboard/dashBoard.js";
 // import { playerForm } from "./components/dashboard/playerForm.jsx";
@@ -13,12 +14,12 @@ import  Home  from "./components/home/home";
 import {
   Authenticator,
   // SignIn,
-  ConfirmSignIn,
-  ForgotPassword,
+  // ConfirmSignIn,
+  // ForgotPassword,
 } from "aws-amplify-react-native";
 import { View, StyleSheet } from "react-native";
 // import AWSAppSyncClient from "aws-appsync";
-import Amplify from "aws-amplify";
+import Amplify, {Storage} from "aws-amplify";
 import config from "./aws-exports";
 Amplify.configure({...config,
   Analytics: {
@@ -50,11 +51,8 @@ export default function App() {
          <ConfirmSignUp />
          <SignIn />
         <Home />
-        {/* <ForgotPassword /> */}
-
+        <ForgotPassword />
         <ConfirmSignIn />
-        <ForgotPassword /> 
-
       </Authenticator>
     </View>
 

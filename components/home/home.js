@@ -9,7 +9,8 @@ import {
 //   Button,
 } from "react-native";
 import  Header  from "./header";
-import { Menu } from "./menu";
+// import { Menu } from "./menu";
+import { NewPlayer } from "../newplayer/newplayer";
 
 export default function Home(props) {
 
@@ -19,13 +20,14 @@ export default function Home(props) {
     return (
       <React.Fragment>
         <View style={styles.container}>
-          <Header user={props.user}
+          <Header user={props.username}
           // navigate={navigate}
           //  user={this.state.currentUser}/
            />
-          <Menu 
+          {/* <Menu 
           // navigate={navigate} 
-          />
+          /> */}
+          <NewPlayer />
         </View>
       </React.Fragment>
     );
