@@ -6,7 +6,6 @@ import {
   Button,
   StyleSheet,
   ImageBackground,
-  // Image,
   Dimensions,
   TouchableOpacity,
   Alert,
